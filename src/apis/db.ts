@@ -2,8 +2,11 @@ import Dexie, { Table } from "dexie";
 
 export interface Todo {
   id?: number;
+  _id: string;
   label: string;
   isChecked?: boolean;
+  updatedAt?: Date;
+  createdAt?: Date;
 }
 
 export class MySubClassedDexie extends Dexie {
@@ -12,9 +15,9 @@ export class MySubClassedDexie extends Dexie {
   todos!: Table<Todo>;
 
   constructor() {
-    super("myDatabase");
+    super("todoDB");
     this.version(1).stores({
-      todos: "id, label, isChecked", // Primary key and indexed props
+      todos: "++id, _id, label, isChecked, updatedAt, createdAt", // Primary key and indexed props
     });
   }
 }

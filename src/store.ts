@@ -1,19 +1,26 @@
 import { create } from "zustand";
 type Todo = {
   id?: number;
+  _id?: string;
   label: string;
   isChecked?: boolean;
+  updatedAt?: Date;
+  createdAt?: Date;
 };
 
 type TodoStore = {
   todos: Todo[];
+  isOnline: boolean;
   addTodo: (label: string) => void;
   toggleTodo: (id: number) => void;
   setTodo: (list: Todo[]) => void;
+  setOnline: (online: boolean) => void;
 };
 
 const todoStore = create<TodoStore>((set) => ({
   todos: [],
+  isOnline: false,
+  setOnline: (online) => set(() => ({ isOnline: online })),
   setTodo: (list) => set((state) => ({ todos: list })),
   addTodo: (label) =>
     set((state) => ({

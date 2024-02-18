@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addTodoApi } from "../../apis";
+import { routesPostApi } from "../../apis";
 import todoStore from "../../store";
 
 function TodoForm() {
@@ -12,8 +12,12 @@ function TodoForm() {
   const handleAdd = async (e: any) => {
     e.preventDefault();
     if (text) {
-      console.log("add todo", text);
-      await addTodoApi({ label: text });
+      await routesPostApi({
+        routeName: "todos",
+        params: {
+          label: text,
+        },
+      });
       addTodo(text);
       setText("");
     }

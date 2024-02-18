@@ -1,20 +1,14 @@
 import React, { useEffect } from "react";
 import TodoCard from "../TodoCard";
-import { getTodosApi } from "../../apis";
+import { routesGetApi } from "../../apis";
 import todoStore from "../../store";
-
-interface Todo {
-  id?: number;
-  label: string;
-  isChecked?: boolean;
-}
 
 function TodoList() {
   const setTodo = todoStore((state) => state.setTodo);
   const list = todoStore((state) => state.todos);
 
   const fetchTodos = async () => {
-    const todos = await getTodosApi();
+    const todos = await routesGetApi({ routeName: "todos" });
     setTodo(todos);
   };
 
@@ -28,7 +22,8 @@ function TodoList() {
         <TodoCard
           key={index}
           label={todo?.label}
-          id={todo.id}
+          _id={todo._id}
+          todoId={todo.id}
           isChecked={todo.isChecked}
         />
       ))}
