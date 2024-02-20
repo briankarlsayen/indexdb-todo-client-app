@@ -21,7 +21,7 @@ const todoStore = create<TodoStore>((set) => ({
   todos: [],
   isOnline: false,
   setOnline: (online) => set(() => ({ isOnline: online })),
-  setTodo: (list) => set((state) => ({ todos: list })),
+  setTodo: (list) => set(() => ({ todos: list })),
   addTodo: (label) =>
     set((state) => ({
       todos: [...state.todos, { id: Date.now(), label, isChecked: false }],

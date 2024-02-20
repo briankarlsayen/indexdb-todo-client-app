@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import TodoCard from "../TodoCard";
 import { routesGetApi } from "../../apis";
 import todoStore from "../../store";
