@@ -28,41 +28,22 @@ interface PApi {
 }
 
 export const routesPostApi = async (props: PApi) => {
-  try {
-    // const { data, error } = useQuery(props.routeName, () =>
-    //   fetchData({
-    //     routeName: props.routeName,
-    //     method: "POST",
-    //     body: props.params,
-    //   })
-    // );
-
-    if (await checkOnline()) {
-      const todo = await fetchData({
-        routeName: props.routeName,
-        method: "POST",
-        body: props.params,
-      });
-      if (todo) await addTodoApi(todo);
-      return todo;
-    }
-  } catch (error) {
-    console.log("error", error);
+  if (await checkOnline()) {
+    const todo = await fetchData({
+      routeName: props.routeName,
+      method: "POST",
+      body: props.params,
+    });
+    if (todo) await addTodoApi(todo);
+    return todo;
   }
 };
 
 export const routesGetApi = async (props: PApi) => {
-  try {
-    // const { data, error } = useQuery(props.routeName, () =>
-    //   fetchData({ routeName: props.routeName, method: "GET" })
-    // );
-    if (await checkOnline())
-      return await fetchData({ routeName: props.routeName, method: "GET" });
+  if (await checkOnline())
+    return await fetchData({ routeName: props.routeName, method: "GET" });
 
-    return await getTodos();
-  } catch (error) {
-    console.log("error", error);
-  }
+  return await getTodos();
 };
 
 export const routesPutApi = async (props: PApi) => {
